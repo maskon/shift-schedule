@@ -74,7 +74,7 @@ function setMonthCalendar(year,month) {
                
                for (let i = 0; i < days.length; i++) {
                    
-                   days[i].style.backgroundColor = '#dddddd'
+                   days[i].style.backgroundColor = 'rgb(221, 221, 221)'
                    
                    let distance = Math.abs(i - index);
                    let isRelevant = (distance - 1) % 4 < 3
@@ -174,18 +174,18 @@ next.onclick = function () {
             
     if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
-        prevPrevLastDay.style.backgroundColor === 'rgb(238, 238, 238)') {
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
             index = 2 + daySum
         }
             
     if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
-        prevLastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
             index = 3 + daySum
         }
 
             
-    if (lastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
             index = 4 + daySum
@@ -199,17 +199,17 @@ next.onclick = function () {
 
     if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
-        prevPrevLastDay.style.backgroundColor === 'rgb(238, 238, 238)') {
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
             index = 6 + daySum
         }
 
     if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
-        prevLastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
             index = 7 + daySum
         }
 
-    if (lastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
             index = 8 + daySum
@@ -223,17 +223,17 @@ next.onclick = function () {
 
     if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
-        prevPrevLastDay.style.backgroundColor === 'rgb(238, 238, 238)') {
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
             index = 10 + daySum
         }
 
     if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
-        prevLastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
             index = 11 + daySum
         }
 
-    if (lastDay.style.backgroundColor === 'rgb(238, 238, 238)' && 
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
             index = 12 + daySum
@@ -241,7 +241,7 @@ next.onclick = function () {
     
     for (let i = 0; i < days.length; i++) {
                    
-        days[i].style.backgroundColor = '#dddddd'
+        days[i].style.backgroundColor = 'rgb(221, 221, 221)'
                   
         let distance = Math.abs(i - index)
                    
