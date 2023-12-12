@@ -74,7 +74,7 @@ function setMonthCalendar(year,month) {
                
                for (let i = 0; i < days.length; i++) {
                    
-                   days[i].style.backgroundColor = '#eeeeee'
+                   days[i].style.backgroundColor = '#dddddd'
                    
                    let distance = Math.abs(i - index);
                    let isRelevant = (distance - 1) % 4 < 3
@@ -241,7 +241,7 @@ next.onclick = function () {
     
     for (let i = 0; i < days.length; i++) {
                    
-        days[i].style.backgroundColor = '#eeeeee'
+        days[i].style.backgroundColor = '#dddddd'
                   
         let distance = Math.abs(i - index)
                    
