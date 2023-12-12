@@ -96,6 +96,7 @@ body{
 .days{
     margin: 0;
     padding: 1.7rem 0;
+    padding-top: 0.2rem;
     background-color: #dddddd;
     width: 100%;
     display: flex;
@@ -123,6 +124,15 @@ body{
     font-weight: 900;
 }
 
+
+.text-day {
+    background-color: #dddddd;
+    margin: 0;
+    padding: 5px;
+    font-weight: 600;
+    text-align: center;
+    color: #930000;
+}
 
 .content {
     display: flex;
