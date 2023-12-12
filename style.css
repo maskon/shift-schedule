@@ -1,0 +1,155 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    background: #eeeeee;
+}
+
+/* месяцы и годы */
+#month-calendar{
+    width: 50%;
+}
+
+.month{
+    margin: 0;
+    padding: 3rem 2rem 2rem;
+    background: #555555;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    list-style: none;
+}
+
+.month li{
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.month li.prev,
+.month li.next{
+    cursor: pointer;
+}
+
+.month li.prev{
+    float: left;
+}
+
+.month li.next{
+    float: right;
+}
+
+.month li.year-name{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.fa, .fab, .fad, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.fa, .fas {
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.fa-angle-double-left:before {
+    content: "";
+}
+
+.fa-angle-double-right:before {
+    content: "";
+}
+
+/* дни недели */
+.weekdays{
+    margin: 0;
+    padding: 1rem 0;
+    background-color: #dddddd;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.weekdays li{
+    display: inline-block;
+    flex: 0 0 calc(100% / 7);
+    text-align: center;
+}
+
+/* дни */
+.days{
+    margin: 0;
+    padding: 0.5rem 0;
+    background-color: #e8e8e8;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: flex-start;
+    height: 14rem;
+}
+
+.days li{
+    padding: 0.5rem;
+    list-style: none;
+    display: inline-block;
+    flex: 0 0 calc(100% / 7);
+    text-align: center;
+    color: #999;
+    border: 1px solid #b2b2b2;
+    font-size: 1.5rem;
+    line-height: 1rem;
+}
+
+.days li.date-now{
+    color: #000;
+    font-weight: 700;
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.content__bg {
+    width: 25px;
+    height: 25px;
+    margin-right:  5px;
+}
+
+.content__bg--1 { 
+    background-color: rgb(255, 255, 255); 
+}
+
+.content__bg--2 { 
+    background-color: rgb(75, 227, 255); 
+}
+
+.content__bg--3 { 
+    background-color: rgb(80, 80, 80); 
+}
+
+
+@media (max-width: 767px) {
+    #month-calendar{
+        width: 100%;
+    }
+
+}
