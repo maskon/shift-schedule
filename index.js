@@ -1,30 +1,33 @@
-let nowDate = new Date(),
-    nowDateNumber = nowDate.getDate(),
-    nowMonth = nowDate.getMonth(),
-    nextMonth = nowMonth + 1,
-    nowYear = nowDate.getFullYear(),
-    container = document.getElementById('month-calendar'),
-    monthContainer = container.getElementsByClassName('month-name')[0],
-    yearContainer = container.getElementsByClassName('year-name')[0],
-    daysContainer = container.getElementsByClassName('days')[0],
-    prev = container.getElementsByClassName('prev')[0],
-    next = container.getElementsByClassName('next')[0],
-    monthName = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь']
+let nowDate = new Date()
+let nowDateNumber = nowDate.getDate()
+let nowMonth = nowDate.getMonth()
+let nextMonth = nowMonth + 1
+let nowYear = nowDate.getFullYear()
+let container = document.getElementById('month-calendar')
+let monthContainer = container.getElementsByClassName('month-name')[0]
+let yearContainer = container.getElementsByClassName('year-name')[0]
+let daysContainer = container.getElementsByClassName('days')[0]
+let prev = container.getElementsByClassName('prev')[0]
+let next = container.getElementsByClassName('next')[0]
+let monthName = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь']
 
 const daysTotal = document.getElementById('days-total')
 const daysNight = document.getElementById('days-night')
 
-// Создаем массив для хранения состояния графика по месяцам
 let shiftsByMonth = []
 let curDate = nowDate.setMonth(nowDate.getMonth() - 1)
 
+let monthDay
+let monthPrefix
+let daysAfterMonth
+let monthDaysText
 
 function setMonthCalendar(year,month) {
-    let monthDays = new Date(year, month + 1, 0).getDate(),
-        monthPrefix = new Date(year, month, 0).getDay(),
-        daysAfterMonth = 7 - ( (monthDays + monthPrefix) % 7 ), // li после последней даты месяца
-        monthDaysText = ''
-
+    monthDays = new Date(year, month + 1, 0).getDate(),
+    monthPrefix = new Date(year, month, 0).getDay(),
+    daysAfterMonth = 7 - ( (monthDays + monthPrefix) % 7 ), // li после последней даты месяца
+    monthDaysText = ''
+    
     monthContainer.textContent = monthName[month]
     yearContainer.textContent = year
     daysContainer.innerHTML = ''
@@ -38,7 +41,16 @@ function setMonthCalendar(year,month) {
     for (let i = 1; i <= monthDays; i++){
         monthDaysText += '<li>' + i + '</li>'
     }
-
+    
+    if(daysAfterMonth === 7) {
+        daysAfterMonth = 0
+    }
+    
+    if (daysAfterMonth > 0) {
+        for (let i = 1; i <= daysAfterMonth; i++) {
+            monthDaysText += '<li></li>';
+        }
+    }
 
     daysContainer.innerHTML = monthDaysText
 
@@ -61,12 +73,11 @@ function setMonthCalendar(year,month) {
     daysElement.forEach(function(item) {
         item.addEventListener('click', generateShifts)
     })
-    
-    
+     
     function generateShifts(e) {
         const day = Number(e.target.textContent)
         const index = Array.from(days).indexOf(e.target)
-            
+           
             if (!isNaN(day)) {
                 
                 count1 = 0
@@ -74,14 +85,14 @@ function setMonthCalendar(year,month) {
                 count3 = 0
                 countSum = 0
                
-               for (let i = 0; i < days.length; i++) {
+                for (let i = 0; i < days.length; i++) {
                    
-                   days[i].style.backgroundColor = 'rgb(221, 221, 221)'
+                    days[i].style.backgroundColor = 'rgb(221, 221, 221)'
                    
-                   let distance = Math.abs(i - index);
-                   let isRelevant = (distance - 1) % 4 < 3
+                    let distance = Math.abs(i - index);
+                    let isRelevant = (distance - 1) % 4 < 3
                    
-                   if (!isNaN(parseInt(days[i].textContent))) {
+                    if (!isNaN(parseInt(days[i].textContent))) {
                     if (i >= index && (i - index) % 4 < 3) {
                         let colorIndex = Math.floor((i - index) / 4) % 3
                         days[i].style.backgroundColor = ['rgb(255, 255, 255)', 'rgb(80, 80, 80)', 'rgb(75, 227, 255)'][colorIndex]
@@ -108,16 +119,7 @@ function setMonthCalendar(year,month) {
                 }
             }
         
-        // Сохраняем состояние графика в массив
-          shiftsByMonth[nowMonth] = {
-            day: day,
-            lastDay: lastDay,
-              days: days
-            // и другие данные, которые вам нужны для сохранения состояния
-          }
-
-        // Обновляем отображение графика
-        updateShiftsDisplay()
+        updateShiftsDisplay() // Обновляем отображение графика
         
     }
     
@@ -126,7 +128,7 @@ function setMonthCalendar(year,month) {
       // Обновляем отображение графика смен согласно сохраненному состоянию в shiftsByMonth
       daysNight.innerHTML = `Ночных смен в этом месяце - ${count3}`
       daysTotal.innerHTML = `Всего смен в этом месяце - ${countSum}`
-    }    
+    }  
 }
 
 setMonthCalendar(nowYear,nowMonth)
@@ -143,18 +145,18 @@ prev.onclick = function () {
 }
 
 next.onclick = function () {
-
-    let lastDay = days[days.length - 1]
-    let prevLastDay = days[days.length - 2]
-    let prevPrevLastDay = days[days.length - 3]
+    
+    let lastDay = days[(days.length - 1) - daysAfterMonth]
+    let prevLastDay = days[(days.length - 2) - daysAfterMonth]
+    let prevPrevLastDay = days[(days.length - 3) - daysAfterMonth]
 
     let curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
 
     curDate.setMonth(curDate.getMonth() + 1)
 
-    let curYear = curDate.getFullYear(),
-        curMonth = curDate.getMonth(),
-        index
+    let curYear = curDate.getFullYear()
+    let curMonth = curDate.getMonth()
+    let index
 
     setMonthCalendar(curYear,curMonth)
     
@@ -165,80 +167,69 @@ next.onclick = function () {
     
     const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
     const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
-    
+
     let daySum = daysArray.length - daysWithNumbers.length
     
     if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
-            index = 1 + daySum
-        }
-            
+            index = 1 + daySum - daysAfterMonth
+        }            
     if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
-            index = 2 + daySum
-        }
-            
+            index = 2 + daySum - daysAfterMonth
+        }            
     if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
-            index = 3 + daySum
+            index = 3 + daySum - daysAfterMonth
         }
-
             
     if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
-            index = 4 + daySum
-        }
-            
+            index = 4 + daySum - daysAfterMonth
+        }          
     if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
-            index = 5 + daySum
+            index = 5 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
-            index = 6 + daySum
+            index = 6 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
         prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
-            index = 7 + daySum
+            index = 7 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
-            index = 8 + daySum
+            index = 8 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
-            index = 9 + daySum
+            index = 9 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
-            index = 10 + daySum
+            index = 10 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
         prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
-            index = 11 + daySum
+            index = 11 + daySum - daysAfterMonth
         }
-
     if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
         prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
         prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
-            index = 12 + daySum
+            index = 12 + daySum - daysAfterMonth
         }
     
     for (let i = 0; i < days.length; i++) {
@@ -271,19 +262,15 @@ next.onclick = function () {
             }
                 
         countSum = count1 + count2 + count3
-
     }
-  
+
     updateShiftsDisplay()
 }
  
-
-// Функция для обновления отображения графика
-    function updateShiftsDisplay() {
-      // Обновляем отображение графика смен согласно сохраненному состоянию в shiftsByMonth
-      daysNight.innerHTML = `Ночных смен в этом месяце - ${count3}`
-      daysTotal.innerHTML = `Всего смен в этом месяце - ${countSum}`
-    }        
+function updateShiftsDisplay() {
+    daysNight.innerHTML = `Ночных смен в этом месяце - ${count3}`
+    daysTotal.innerHTML = `Всего смен в этом месяце - ${countSum}`
+}        
 
 
 
