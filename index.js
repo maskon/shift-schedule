@@ -77,7 +77,7 @@ function setMonthCalendar(year,month) {
     function generateShifts(e) {
         const day = Number(e.target.textContent)
         const index = Array.from(days).indexOf(e.target)
-           
+        
             if (!isNaN(day)) {
                 
                 count1 = 0
@@ -134,15 +134,134 @@ function setMonthCalendar(year,month) {
 setMonthCalendar(nowYear,nowMonth)
 
 prev.onclick = function () {
+    let lastDay = days[(days.length - days.length) + monthPrefix]
+    let prevLastDay = days[(days.length - days.length) + monthPrefix + 1]
+    let prevPrevLastDay = days[(days.length - days.length) + monthPrefix + 2]
+
     let curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
 
     curDate.setMonth(curDate.getMonth() - 1)
 
     let curYear = curDate.getFullYear(),
         curMonth = curDate.getMonth()
+    
+    let index
 
     setMonthCalendar(curYear,curMonth)
+    
+    count1 = 0
+    count2 = 0
+    count3 = 0
+    countSum = 0
+    
+    const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
+    const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
+
+    let daySum = daysArray.length - daysWithNumbers.length
+
+    if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
+            index = daysWithNumbers.length + 4  + monthPrefix
+        }            
+    if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
+            index = daysWithNumbers.length + 3  + monthPrefix
+        }            
+    if (lastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
+            index = daysWithNumbers.length + 2  + monthPrefix
+        }
+            
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
+            index = daysWithNumbers.length + 1 + monthPrefix
+        }          
+    if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(255, 255, 255)') {
+            index = daysWithNumbers.length - 0 + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
+            index = daysWithNumbers.length - 1  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(255, 255, 255)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
+            index = daysWithNumbers.length - 2  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
+            index = daysWithNumbers.length - 3  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(80, 80, 80)') {
+            index = daysWithNumbers.length - 4  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevLastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(221, 221, 221)') {
+            index = daysWithNumbers.length - 5  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(80, 80, 80)' && 
+        prevLastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
+            index = daysWithNumbers.length - 6  + monthPrefix
+        }
+    if (lastDay.style.backgroundColor === 'rgb(221, 221, 221)' && 
+        prevLastDay.style.backgroundColor === 'rgb(75, 227, 255)' && 
+        prevPrevLastDay.style.backgroundColor === 'rgb(75, 227, 255)') {
+            index = daysWithNumbers.length - 7  + monthPrefix
+        }
+    
+    for (let i = 0; i < days.length; i++) {
+                   
+        days[i].style.backgroundColor = 'rgb(221, 221, 221)'
+                  
+        let distance = Math.abs(i - index)
+                   
+        if (!isNaN(parseInt(days[i].textContent))) {
+ 
+            if (i >= index && (i - index) % 4 < 3) {
+                let colorIndex = Math.floor((i - index) / 4) % 3
+                days[i].style.backgroundColor = ['rgb(255, 255, 255)', 'rgb(80, 80, 80)', 'rgb(75, 227, 255)'][colorIndex]
+                } else if (i < index) {
+                    if ((distance - 1) % 4 === 1 || (distance - 1) % 4 === 2 || (distance - 1) % 4 === 3) {
+                        let colorIndex = Math.floor((distance - 2) / 4) % 3
+                        days[i].style.backgroundColor = ['rgb(75, 227, 255)', 'rgb(80, 80, 80)', 'rgb(255, 255, 255)'][colorIndex]
+                    }
+                }
+            }
+        
+        if (days[i].style.backgroundColor === 'rgb(255, 255, 255)') {
+            count1++
+            }
+        if (days[i].style.backgroundColor === 'rgb(75, 227, 255)') {
+            count2++
+            }
+        if (days[i].style.backgroundColor === 'rgb(80, 80, 80)') {
+            count3++
+            }
+                
+        countSum = count1 + count2 + count3
+    }
+
+    updateShiftsDisplay()
 }
+ 
+function updateShiftsDisplay() {
+    daysNight.innerHTML = `Ночных смен в этом месяце - ${count3}`
+    daysTotal.innerHTML = `Всего смен в этом месяце - ${countSum}`
+}        
+
+
 
 next.onclick = function () {
     
