@@ -1,9 +1,12 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');*/
+
 *{
     box-sizing: border-box;
 }
 
 body{
     font-family: "Roboto", sans-serif;
+    font-weight: 400;
     background: #eeeeee;
 }
 
@@ -89,7 +92,7 @@ body{
     display: inline-block;
     flex: 0 0 calc(100% / 7);
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* дни #e8e8e8*/
@@ -114,7 +117,7 @@ body{
     color: #1c1c1c;
     border: 1px solid #a3a3a3;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1rem;
     cursor: pointer;
 }
@@ -125,11 +128,12 @@ body{
 }
 
 
+
 .text-day {
     background-color: #dddddd;
     margin: 0;
     padding: 5px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
     color: #930000;
 }
@@ -140,10 +144,16 @@ body{
     margin: 15px 0;
 }
 
+.content__text {
+    font-weight: 700;
+    color: rgb(80, 80, 80);
+}
+
 .content__bg {
     width: 25px;
     height: 25px;
-    margin-right:  5px;
+    margin-right: 5px;
+    border: 2px solid #a3a3a3;
 }
 
 .content__bg--1 { 
@@ -158,8 +168,18 @@ body{
     background-color: rgb(80, 80, 80); 
 }
 
+.days-text {
+    font-weight: 900;
+    color: #930000;
+    margin: 5px 0;
+}
+
 
 @media (max-width: 767px) {
+    body {
+        margin: 0 5px;
+    }
+    
     #month-calendar{
         width: 100%;
     }
