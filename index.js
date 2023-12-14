@@ -69,8 +69,10 @@ function setMonthCalendar(year,month) {
     let lastDay = days[days.length - 1]
     
     const daysElement = daysContainer.querySelectorAll('li')
+    const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
+    const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
     
-    daysElement.forEach(function(item) {
+    daysWithNumbers.forEach(function(item) {
         item.addEventListener('click', generateShifts)
     })
      
