@@ -177,11 +177,12 @@ body{
 
 @media (max-width: 767px) {
     body {
-        margin: 5px;
+        margin: 0 5px;
     }
     
     #month-calendar{
         width: 100%;
+        margin-top: 2px;
     }
 
 }
