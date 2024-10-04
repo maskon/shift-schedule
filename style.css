@@ -144,8 +144,14 @@ body{
 
 .content {
     display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.content_item {
+    display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 15px 0 5px 0;
 }
 
 .content__text {
@@ -176,6 +182,11 @@ body{
     font-weight: 900;
     color: #930000;
     margin: 5px 0;
+}
+
+.days-text_num {
+    color: #ff3d00;
+    font-size: 19px;
 }
 
 .ZP-clean {

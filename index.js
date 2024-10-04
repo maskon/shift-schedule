@@ -273,8 +273,8 @@ function bgCalc(i) {
 
 // Выводим на страницу кол-во смен
 function updateShiftsDisplay() {
-    daysNight.innerHTML = `Ночных смен в этом месяце - ${count3}`
-    daysTotal.innerHTML = `Всего смен в этом месяце - ${countSum}`
+    daysNight.innerHTML = `Ночных смен в этом месяце - <span class="days-text_num">${count3}</span>`
+    daysTotal.innerHTML = `Всего смен в этом месяце - <span class="days-text_num">${countSum}</span>`
     // localStorage.setItem('count3', count3)
     // localStorage.setItem('countSum', countSum)
     // console.log(localStorage.getItem('count3'))
