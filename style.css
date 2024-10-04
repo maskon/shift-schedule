@@ -10,6 +10,7 @@ body{
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     background: #eeeeee;
+    user-select: none;
 }
 
 /* месяцы и годы */
@@ -174,6 +175,19 @@ body{
     font-weight: 900;
     color: #930000;
     margin: 5px 0;
+}
+
+.ZP-clean {
+    font-size: 22px;
+    color: #0a1863;
+    margin-left: 2px;
+}
+
+.ZP-dirty {
+    font-size: 16px;
+    font-weight: 600;
+    color: #b9b9b9;
+    margin-left: 5px;
 }
 
 
