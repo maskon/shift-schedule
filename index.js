@@ -326,7 +326,7 @@ function calc(num, col) {
         maximumFractionDigits: 2,
     })
     calcZP.innerHTML += `
-        <div class="days-text">ЗП на ${num} разряде 
+        <div class="days-text">ЗП на ${num} разряде - 
             <span class="ZP-clean">${sumPercentLocal} ₽</span>
             <span class="ZP-dirty">${sumLocal} ₽<span>
         </div>

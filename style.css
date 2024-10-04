@@ -16,6 +16,7 @@ body{
 /* месяцы и годы */
 #month-calendar{
     width: 50%;
+    padding-bottom: 15px;;
 }
 
 .month{
