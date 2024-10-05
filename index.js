@@ -74,155 +74,157 @@ function setMonthCalendar(year,month) {
 
 setMonthCalendar(nowYear,nowMonth)
 
-prev.onclick = function () {
-    lastDay = days[(days.length - days.length) + monthPrefix]
-    prevLastDay = days[(days.length - days.length) + monthPrefix + 1]
-    prevPrevLastDay = days[(days.length - days.length) + monthPrefix + 2]
-    curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
-    curDate.setMonth(curDate.getMonth() - 1)
-    curYear = curDate.getFullYear()
-    curMonth = curDate.getMonth()
-    setMonthCalendar(curYear,curMonth)
-    count1 = 0
-    count2 = 0
-    count3 = 0
-    countSum = 0
-    const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
-    const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
-    calcZP.innerHTML = '' // Очищаем отображение ЗП
-    daySum = daysArray.length - daysWithNumbers.length
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
-            index = daysWithNumbers.length + 4  + monthPrefix
-        }            
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = daysWithNumbers.length + 3  + monthPrefix
-        }            
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === white) {
-            index = daysWithNumbers.length + 2  + monthPrefix
-        }    
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
-            index = daysWithNumbers.length + 1 + monthPrefix
-        }          
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
-            index = daysWithNumbers.length - 0 + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = daysWithNumbers.length - 1  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === black) {
-            index = daysWithNumbers.length - 2  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
-            index = daysWithNumbers.length - 3  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
-            index = daysWithNumbers.length - 4  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = daysWithNumbers.length - 5  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === blue) {
-            index = daysWithNumbers.length - 6  + monthPrefix
-        }
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
-            index = daysWithNumbers.length - 7  + monthPrefix
-        }
-    for (let i = 0; i < days.length; i++) {              
-        days[i].style.backgroundColor = transparent                  
-        distance = Math.abs(i - index)                  
-        if (!isNaN(parseInt(days[i].textContent))) { 
-            if (i >= index && (i - index) % 4 < 3) {
-                colorIndex = Math.floor((i - index) / 4) % 3
-                days[i].style.backgroundColor = [white, black, blue][colorIndex]
-                } else if (i < index) {
-                    if ((distance - 1) % 4 === 1 || (distance - 1) % 4 === 2 || (distance - 1) % 4 === 3) {
-                        colorIndex = Math.floor((distance - 2) / 4) % 3
-                        days[i].style.backgroundColor = [blue, black, white][colorIndex]
+prev.addEventListener('click', prenClick)
+    function prenClick () {
+        lastDay = days[(days.length - days.length) + monthPrefix]
+        prevLastDay = days[(days.length - days.length) + monthPrefix + 1]
+        prevPrevLastDay = days[(days.length - days.length) + monthPrefix + 2]
+        curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
+        curDate.setMonth(curDate.getMonth() - 1)
+        curYear = curDate.getFullYear()
+        curMonth = curDate.getMonth()
+        setMonthCalendar(curYear,curMonth)
+        count1 = 0
+        count2 = 0
+        count3 = 0
+        countSum = 0
+        const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
+        const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
+        calcZP.innerHTML = '' // Очищаем отображение ЗП
+        daySum = daysArray.length - daysWithNumbers.length
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
+                index = daysWithNumbers.length + 4  + monthPrefix
+            }            
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = daysWithNumbers.length + 3  + monthPrefix
+            }            
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === white) {
+                index = daysWithNumbers.length + 2  + monthPrefix
+            }    
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
+                index = daysWithNumbers.length + 1 + monthPrefix
+            }          
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
+                index = daysWithNumbers.length - 0 + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = daysWithNumbers.length - 1  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === black) {
+                index = daysWithNumbers.length - 2  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
+                index = daysWithNumbers.length - 3  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
+                index = daysWithNumbers.length - 4  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = daysWithNumbers.length - 5  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === blue) {
+                index = daysWithNumbers.length - 6  + monthPrefix
+            }
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
+                index = daysWithNumbers.length - 7  + monthPrefix
+            }
+        for (let i = 0; i < days.length; i++) {              
+            days[i].style.backgroundColor = transparent                  
+            distance = Math.abs(i - index)                  
+            if (!isNaN(parseInt(days[i].textContent))) { 
+                if (i >= index && (i - index) % 4 < 3) {
+                    colorIndex = Math.floor((i - index) / 4) % 3
+                    days[i].style.backgroundColor = [white, black, blue][colorIndex]
+                    } else if (i < index) {
+                        if ((distance - 1) % 4 === 1 || (distance - 1) % 4 === 2 || (distance - 1) % 4 === 3) {
+                            colorIndex = Math.floor((distance - 2) / 4) % 3
+                            days[i].style.backgroundColor = [blue, black, white][colorIndex]
+                        }
                     }
-                }
-            }       
-            bgCalc(i)
+                }       
+                bgCalc(i)
+        }
+        updateShiftsDisplay()
+        calc(5, discharge5)
+        calc(4, discharge4)
+        calc('2-3', discharge3)
     }
-    updateShiftsDisplay()
-    calc(5, discharge5)
-    calc(4, discharge4)
-    calc('2-3', discharge3)
-}
 
-next.onclick = function () {   
-    lastDay = days[(days.length - 1) - daysAfterMonth]
-    prevLastDay = days[(days.length - 2) - daysAfterMonth]
-    prevPrevLastDay = days[(days.length - 3) - daysAfterMonth]
-    curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
-    curDate.setMonth(curDate.getMonth() + 1)
-    curYear = curDate.getFullYear()
-    curMonth = curDate.getMonth()
-    setMonthCalendar(curYear,curMonth)  
-    count1 = 0
-    count2 = 0
-    count3 = 0
-    countSum = 0   
-    const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
-    const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
-    calcZP.innerHTML = '' // Очищаем отображение ЗП
-    daySum = daysArray.length - daysWithNumbers.length   
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
-            index = 1 + daySum - daysAfterMonth
-        }            
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = 2 + daySum - daysAfterMonth
-        }            
-    if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === black) {
-            index = 3 + daySum - daysAfterMonth
-        }   
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
-            index = 4 + daySum - daysAfterMonth
-        }          
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
-            index = 5 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = 6 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === white) {
-            index = 7 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
-            index = 8 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
-            index = 9 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === transparent) {
-            index = 10 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === blue) {
-            index = 11 + daySum - daysAfterMonth
-        }
-    if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
-            index = 12 + daySum - daysAfterMonth
-        }   
-    for (let i = 0; i < days.length; i++) {                   
-        days[i].style.backgroundColor = transparent                 
-        distance = Math.abs(i - index)                  
-        if (!isNaN(parseInt(days[i].textContent))) {
-            if (i >= index && (i - index) % 4 < 3) {
-                colorIndex = Math.floor((i - index) / 4) % 3
-                days[i].style.backgroundColor = [white, black, blue][colorIndex]
-                } else if (i < index) {
-                    if ((distance - 1) % 4 === 1 || (distance - 1) % 4 === 2 || (distance - 1) % 4 === 3) {
-                        colorIndex = Math.floor((distance - 2) / 4) % 3
-                        days[i].style.backgroundColor = [blue, black, white][colorIndex]
+next.addEventListener('click', nextClick) 
+    function nextClick() {   
+        lastDay = days[(days.length - 1) - daysAfterMonth]
+        prevLastDay = days[(days.length - 2) - daysAfterMonth]
+        prevPrevLastDay = days[(days.length - 3) - daysAfterMonth]
+        curDate = new Date(yearContainer.textContent,monthName.indexOf(monthContainer.textContent))
+        curDate.setMonth(curDate.getMonth() + 1)
+        curYear = curDate.getFullYear()
+        curMonth = curDate.getMonth()
+        setMonthCalendar(curYear,curMonth)  
+        count1 = 0
+        count2 = 0
+        count3 = 0
+        countSum = 0   
+        const daysArray = Array.from(days); // Преобразование HTMLCollection в массив
+        const daysWithNumbers = daysArray.filter(item => /\d/.test(item.textContent)); // Фильтрация элементов
+        calcZP.innerHTML = '' // Очищаем отображение ЗП
+        daySum = daysArray.length - daysWithNumbers.length   
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
+                index = 1 + daySum - daysAfterMonth
+            }            
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = 2 + daySum - daysAfterMonth
+            }            
+        if (lastDay.style.backgroundColor === blue && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === black) {
+                index = 3 + daySum - daysAfterMonth
+            }   
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
+                index = 4 + daySum - daysAfterMonth
+            }          
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === black) {
+                index = 5 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === black && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = 6 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === black && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === white) {
+                index = 7 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
+                index = 8 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === white) {
+                index = 9 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === white && prevPrevLastDay.style.backgroundColor === transparent) {
+                index = 10 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === white && prevLastDay.style.backgroundColor === transparent && prevPrevLastDay.style.backgroundColor === blue) {
+                index = 11 + daySum - daysAfterMonth
+            }
+        if (lastDay.style.backgroundColor === transparent && prevLastDay.style.backgroundColor === blue && prevPrevLastDay.style.backgroundColor === blue) {
+                index = 12 + daySum - daysAfterMonth
+            }   
+        for (let i = 0; i < days.length; i++) {                   
+            days[i].style.backgroundColor = transparent                 
+            distance = Math.abs(i - index)                  
+            if (!isNaN(parseInt(days[i].textContent))) {
+                if (i >= index && (i - index) % 4 < 3) {
+                    colorIndex = Math.floor((i - index) / 4) % 3
+                    days[i].style.backgroundColor = [white, black, blue][colorIndex]
+                    } else if (i < index) {
+                        if ((distance - 1) % 4 === 1 || (distance - 1) % 4 === 2 || (distance - 1) % 4 === 3) {
+                            colorIndex = Math.floor((distance - 2) / 4) % 3
+                            days[i].style.backgroundColor = [blue, black, white][colorIndex]
+                        }
                     }
-                }
-            }        
-            bgCalc(i)
+                }        
+                bgCalc(i)
+        }
+        updateShiftsDisplay()
+        calc(5, discharge5)
+        calc(4, discharge4)
+        calc('2-3', discharge3)
     }
-    updateShiftsDisplay()
-    calc(5, discharge5)
-    calc(4, discharge4)
-    calc('2-3', discharge3)
-}
 
 function generateShifts(e) {
     calcZP.innerHTML = '' // Очищаем отображение ЗП
@@ -332,3 +334,40 @@ function calc(num, col) {
         </div>
     `
 }
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener('touchstart', handleTouchStart);
+document.addEventListener('touchmove', handleTouchMove);
+
+function handleTouchStart(event) {
+// Убедитесь, что есть хотя бы один палец на экране
+    if (event.touches.length > 0) {
+    // Получите начальные координаты первого пальца
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+    }
+}
+
+function handleTouchMove(event) {
+// Убедитесь, что есть хотя бы один палец на экране
+    if (event.touches.length > 0) {
+    // Получите текущие координаты первого пальца
+        const currentX = event.touches[0].clientX
+        const currentY = event.touches[0].clientY
+    // Вычислите разницу в позициях
+    const diffX = currentX - startX
+    const diffY = currentY - startY
+    // Определим направление свайпа, если разница по горизонтали больше разницы по вертикали
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        diffX > 0 ? swipeRight() : swipeLeft()
+    }
+    // Обновляем начальные координаты для следующего события touchmove
+    startX = currentX
+    startY = currentY
+    }
+}
+
+function swipeRight() { prenClick() }
+function swipeLeft() { nextClick() }
