@@ -34,6 +34,8 @@ let lastDay, prevLastDay, prevPrevLastDay, curYear, curMonth, index, daySum, dis
 
 let count1, count2, count3, countSum, sum
 
+let startX = 0, startY = 0, isSwiped = false
+
 function setMonthCalendar(year,month) {
     monthDays = new Date(year, month + 1, 0).getDate(),
     monthPrefix = new Date(year, month, 0).getDay(),
@@ -335,39 +337,37 @@ function calc(num, col) {
     `
 }
 
-let startX = 0;
-let startY = 0;
-
-document.addEventListener('touchstart', handleTouchStart);
-document.addEventListener('touchmove', handleTouchMove);
+document.addEventListener('touchstart', handleTouchStart)
+document.addEventListener('touchmove', handleTouchMove)
 
 function handleTouchStart(event) {
-// Убедитесь, что есть хотя бы один палец на экране
+    // Убедитесь, что есть хотя бы один палец на экране
     if (event.touches.length > 0) {
-    // Получите начальные координаты первого пальца
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
+        // Получите начальные координаты первого пальца
+        startX = event.touches[0].clientX
+        startY = event.touches[0].clientY
+        isSwiped = false
     }
 }
-
 function handleTouchMove(event) {
-// Убедитесь, что есть хотя бы один палец на экране
+    // Если свайп уже произошел, выходим из функции
+    if (isSwiped) return
+    // Убедитесь, что есть хотя бы один палец на экране
     if (event.touches.length > 0) {
-    // Получите текущие координаты первого пальца
+        // Получите текущие координаты первого пальца
         const currentX = event.touches[0].clientX
         const currentY = event.touches[0].clientY
-    // Вычислите разницу в позициях
-    const diffX = currentX - startX
-    const diffY = currentY - startY
-    // Определим направление свайпа, если разница по горизонтали больше разницы по вертикали
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        diffX > 0 ? swipeRight() : swipeLeft()
-    }
-    // Обновляем начальные координаты для следующего события touchmove
-    startX = currentX
-    startY = currentY
+        // Вычислите разницу в позициях
+        const diffX = currentX - startX
+        const diffY = currentY - startY
+        // Определим направление свайпа, если разница по горизонтали больше разницы по вертикали
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            diffX > 0 ? swipeRight() : swipeLeft()
+            isSwiped = true
+        }
     }
 }
 
 function swipeRight() { prenClick() }
 function swipeLeft() { nextClick() }
+
