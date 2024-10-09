@@ -305,11 +305,11 @@ function calc(num, col) {
             monthContainer.innerHTML === 'май' && item.innerHTML === '9' || 
             monthContainer.innerHTML === 'июнь' && item.innerHTML === '12' || 
             monthContainer.innerHTML === 'ноябрь' && item.innerHTML === '4') {
-            if (item.style.backgroundColor === 'rgb(255, 255, 255)') {
+            if (item.style.backgroundColor === white) {
                 sum += (col * 8)
                 // console.log('1 смена (8 часов)')
             }
-            if (item.style.backgroundColor === 'rgb(75, 227, 255)') {
+            if (item.style.backgroundColor === blue) {
                 sum += (col * 8)
                 // console.log('2 смена (8 часов)')
             }
@@ -317,18 +317,18 @@ function calc(num, col) {
                     item.nextSibling.nextSibling.style.backgroundColor === blue) {
                         sum += (7 * ((col * 40 / 100) + col))
                 }
-            if (item.style.backgroundColor === 'rgb(80, 80, 80)') {
+            if (item.style.backgroundColor === black) {
                 sum += ((col * 40 / 100) + col)
                 // console.log('3 смена (1 час)')
-                if (item.nextSibling.style.backgroundColor === 'rgb(80, 80, 80)' && 
-                    item.nextSibling.nextSibling.style.backgroundColor === 'rgb(80, 80, 80)') {
+                if (item.nextSibling.style.backgroundColor === black && 
+                    item.nextSibling.nextSibling.style.backgroundColor === black) {
                         // console.log('0 часов')
                 } else {
                     sum += (7 * ((col * 40 / 100) + col))
                     // console.log('+7 часов')
                 }
             }
-            else if (item.style.backgroundColor === 'rgb(221, 221, 221)') {
+            else if (item.style.backgroundColor === transparent) {
                 // console.log('Выходной')
             }
         }
