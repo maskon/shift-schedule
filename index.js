@@ -36,6 +36,10 @@ let count1, count2, count3, countSum, sum
 
 let startX = 0, startY = 0, isSwiped = false
 
+// if (localStorage.getItem('HTML')) {
+//     container.innerHTML = localStorage.getItem('HTML')
+// }
+
 function setMonthCalendar(year,month) {
     monthDays = new Date(year, month + 1, 0).getDate(),
     monthPrefix = new Date(year, month, 0).getDay(),
@@ -150,6 +154,8 @@ prev.addEventListener('click', prenClick)
         calc(5, discharge5)
         calc(4, discharge4)
         calc('2-3', discharge3)
+
+        // saveHTML() // Сохраняем в localStorage
     }
 
 next.addEventListener('click', nextClick) 
@@ -226,6 +232,8 @@ next.addEventListener('click', nextClick)
         calc(5, discharge5)
         calc(4, discharge4)
         calc('2-3', discharge3)
+
+        // saveHTML() // Сохраняем в localStorage
     }
 
 function generateShifts(e) {
@@ -259,6 +267,8 @@ function generateShifts(e) {
     calc(5, discharge5) // Считаем ЗП на 5 разряде
     calc(4, discharge4) // Считаем ЗП на 4 разряде
     calc('2-3', discharge3) // Считаем ЗП на 2 и 3 разряде
+
+    // saveHTML()  // Сохраняем в localStorage
 }
 
 // Считаем кол-во смен
@@ -303,16 +313,20 @@ function calc(num, col) {
                 sum += (col * 8)
                 // console.log('2 смена (8 часов)')
             }
+            if (item.nextSibling.style.backgroundColor === blue && 
+                    item.nextSibling.nextSibling.style.backgroundColor === blue) {
+                        sum += (7 * ((col * 40 / 100) + col))
+                }
             if (item.style.backgroundColor === 'rgb(80, 80, 80)') {
                 sum += ((col * 40 / 100) + col)
                 // console.log('3 смена (1 час)')
                 if (item.nextSibling.style.backgroundColor === 'rgb(80, 80, 80)' && 
                     item.nextSibling.nextSibling.style.backgroundColor === 'rgb(80, 80, 80)') {
                         // console.log('0 часов')
-                    } else {
-                        sum += (7 * ((col * 40 / 100) + col))
-                        // console.log('+7 часов')
-                    }
+                } else {
+                    sum += (7 * ((col * 40 / 100) + col))
+                    // console.log('+7 часов')
+                }
             }
             else if (item.style.backgroundColor === 'rgb(221, 221, 221)') {
                 // console.log('Выходной')
@@ -337,6 +351,7 @@ function calc(num, col) {
     `
 }
 
+// Свайп вправо-влево
 document.addEventListener('touchstart', handleTouchStart)
 document.addEventListener('touchmove', handleTouchMove)
 
@@ -370,4 +385,8 @@ function handleTouchMove(event) {
 
 function swipeRight() { prenClick() }
 function swipeLeft() { nextClick() }
+
+// function saveHTML() {
+//     localStorage.setItem('HTML', container.innerHTML)
+// }
 
