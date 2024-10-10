@@ -314,8 +314,10 @@ function calc(num, col) {
                 // console.log('2 смена (8 часов)')
             }
             if (item.nextSibling.style.backgroundColor === blue && 
-                    item.nextSibling.nextSibling.style.backgroundColor === blue) {
-                        sum += (7 * ((col * 40 / 100) + col))
+                item.nextSibling.nextSibling.style.backgroundColor === blue && 
+                item.nextSibling.nextSibling.nextSibling.style.backgroundColor === blue) {
+                    sum += (7 * ((col * 40 / 100) + col))
+                    console.log('ok')
                 }
             if (item.style.backgroundColor === black) {
                 sum += ((col * 40 / 100) + col)
